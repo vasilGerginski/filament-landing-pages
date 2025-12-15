@@ -22,7 +22,7 @@ class LandingPageResource extends Resource
 {
     protected static ?string $model = LandingPage::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getModel(): string
     {
