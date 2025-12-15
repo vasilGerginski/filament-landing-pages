@@ -15,10 +15,6 @@ class LandingPagePolicy
      */
     public function viewAny(Authenticatable $user): bool
     {
-        if (method_exists($user, 'can')) {
-            return $user->can('view_any_landing::page');
-        }
-
         return true;
     }
 
@@ -27,10 +23,6 @@ class LandingPagePolicy
      */
     public function view(Authenticatable $user, LandingPage $landingPage): bool
     {
-        if (method_exists($user, 'can')) {
-            return $user->can('view_landing::page');
-        }
-
         return true;
     }
 
@@ -39,10 +31,6 @@ class LandingPagePolicy
      */
     public function create(Authenticatable $user): bool
     {
-        if (method_exists($user, 'can')) {
-            return $user->can('create_landing::page');
-        }
-
         return true;
     }
 
@@ -51,10 +39,6 @@ class LandingPagePolicy
      */
     public function update(Authenticatable $user, LandingPage $landingPage): bool
     {
-        if (method_exists($user, 'can')) {
-            return $user->can('update_landing::page');
-        }
-
         return true;
     }
 
@@ -63,10 +47,6 @@ class LandingPagePolicy
      */
     public function delete(Authenticatable $user, LandingPage $landingPage): bool
     {
-        if (method_exists($user, 'can')) {
-            return $user->can('delete_landing::page');
-        }
-
         return true;
     }
 
@@ -75,10 +55,6 @@ class LandingPagePolicy
      */
     public function deleteAny(Authenticatable $user): bool
     {
-        if (method_exists($user, 'can')) {
-            return $user->can('delete_any_landing::page');
-        }
-
         return true;
     }
 
@@ -87,10 +63,6 @@ class LandingPagePolicy
      */
     public function forceDelete(Authenticatable $user, LandingPage $landingPage): bool
     {
-        if (method_exists($user, 'can')) {
-            return $user->can('force_delete_landing::page');
-        }
-
         return true;
     }
 
@@ -99,10 +71,6 @@ class LandingPagePolicy
      */
     public function forceDeleteAny(Authenticatable $user): bool
     {
-        if (method_exists($user, 'can')) {
-            return $user->can('force_delete_any_landing::page');
-        }
-
         return true;
     }
 
@@ -111,10 +79,6 @@ class LandingPagePolicy
      */
     public function restore(Authenticatable $user, LandingPage $landingPage): bool
     {
-        if (method_exists($user, 'can')) {
-            return $user->can('restore_landing::page');
-        }
-
         return true;
     }
 
@@ -123,10 +87,6 @@ class LandingPagePolicy
      */
     public function restoreAny(Authenticatable $user): bool
     {
-        if (method_exists($user, 'can')) {
-            return $user->can('restore_any_landing::page');
-        }
-
         return true;
     }
 
@@ -135,10 +95,6 @@ class LandingPagePolicy
      */
     public function replicate(Authenticatable $user, LandingPage $landingPage): bool
     {
-        if (method_exists($user, 'can')) {
-            return $user->can('replicate_landing::page');
-        }
-
         return true;
     }
 }

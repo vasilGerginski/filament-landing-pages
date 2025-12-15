@@ -2,6 +2,7 @@
 
 namespace VasilGerginski\FilamentLandingPages;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use VasilGerginski\FilamentLandingPages\Contracts\ConversionTrackerContract;
@@ -24,6 +25,7 @@ use VasilGerginski\FilamentLandingPages\Livewire\LandingPage;
 use VasilGerginski\FilamentLandingPages\Livewire\PreviewLandingPage;
 use VasilGerginski\FilamentLandingPages\Services\ConversionTracker;
 use VasilGerginski\FilamentLandingPages\Commands\InstallCommand;
+use VasilGerginski\FilamentLandingPages\Policies\LandingPagePolicy;
 
 class FilamentLandingPagesServiceProvider extends ServiceProvider
 {
@@ -55,6 +57,10 @@ class FilamentLandingPagesServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Register policy
+        $modelClass = config('filament-landing-pages.models.landing_page', \VasilGerginski\FilamentLandingPages\Models\LandingPage::class);
+        Gate::policy($modelClass, LandingPagePolicy::class);
+
         // Load routes
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
