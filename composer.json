@@ -18,15 +18,14 @@
     ],
     "require": {
         "php": "^8.2",
-        "filament/filament": "^3.0",
-        "illuminate/contracts": "^11.0|^12.0",
+        "filament/filament": "^4.0",
+        "illuminate/contracts": "^11.28|^12.0",
         "livewire/livewire": "^3.0"
     },
     "require-dev": {
         "orchestra/testbench": "^9.0"
     },
     "suggest": {
-        "awcodes/filament-tiptap-editor": "For rich text editing in landing page blocks",
         "spatie/laravel-medialibrary": "For advanced media management",
         "artesaos/seotools": "For SEO meta tag management"
     },

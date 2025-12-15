@@ -105,17 +105,16 @@ class BlockRegistry
     }
 
     /**
-     * Create a rich text editor field with TiptapEditor fallback
+     * Create a rich text editor field using Filament 4's built-in RichEditor
      */
-    public static function richTextEditor(string $name): mixed
+    public static function richTextEditor(string $name): \Filament\Forms\Components\RichEditor
     {
-        if (class_exists('\FilamentTiptapEditor\TiptapEditor')) {
-            return \FilamentTiptapEditor\TiptapEditor::make($name)
-                ->output(\FilamentTiptapEditor\Enums\TiptapOutput::Html);
-        }
-
-        return \Filament\Forms\Components\Textarea::make($name)
-            ->rows(3)
-            ->helperText('HTML is supported');
+        return \Filament\Forms\Components\RichEditor::make($name)
+            ->toolbarButtons([
+                ['bold', 'italic', 'underline', 'strike', 'link'],
+                ['h2', 'h3'],
+                ['bulletList', 'orderedList'],
+                ['undo', 'redo'],
+            ]);
     }
 }
