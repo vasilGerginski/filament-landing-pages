@@ -28,6 +28,8 @@ return [
     // Table actions
     'duplicate' => 'Duplicate',
     'preview' => 'Preview',
+    'view_live' => 'View Live',
+    'add_section' => 'Add Section',
     'show_active_only' => 'Show Active Only',
     'activate_selected' => 'Activate Selected',
     'deactivate_selected' => 'Deactivate Selected',

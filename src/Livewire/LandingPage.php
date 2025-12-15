@@ -2,9 +2,11 @@
 
 namespace VasilGerginski\FilamentLandingPages\Livewire;
 
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use VasilGerginski\FilamentLandingPages\Models\LandingPage as LandingPageModel;
 
+#[Layout('filament-landing-pages::layouts.preview')]
 class LandingPage extends Component
 {
     public $slug;

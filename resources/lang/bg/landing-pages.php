@@ -28,6 +28,8 @@ return [
     // Table actions
     'duplicate' => 'Дублирай',
     'preview' => 'Преглед',
+    'view_live' => 'Виж на живо',
+    'add_section' => 'Добави секция',
     'show_active_only' => 'Покажи само активните',
     'activate_selected' => 'Активирай избраните',
     'deactivate_selected' => 'Деактивирай избраните',
