@@ -7,7 +7,32 @@ return [
         'plural_label' => 'Landing Pages',
     ],
 
-    // Form fields
+    // Flat keys used in resource
+    'title' => 'Title',
+    'slug' => 'Slug',
+    'slug_helper' => 'URL-friendly identifier. Use only letters, numbers, and hyphens.',
+    'meta_description' => 'Meta Description',
+    'goal_type' => 'Goal Type',
+    'goal_type_helper' => 'Select a template to get started with pre-configured sections.',
+    'goal' => 'Goal',
+    'is_active' => 'Active',
+    'is_active_helper' => 'Only active landing pages are publicly accessible.',
+    'active' => 'Active',
+    'enable_analytics' => 'Enable Analytics',
+    'tracking_code' => 'Tracking Code',
+    'tracking_code_helper' => 'Add custom tracking scripts (Google Analytics, Facebook Pixel, etc.)',
+    'utm_source' => 'UTM Source',
+    'utm_medium' => 'UTM Medium',
+    'utm_campaign' => 'UTM Campaign',
+
+    // Table actions
+    'duplicate' => 'Duplicate',
+    'preview' => 'Preview',
+    'show_active_only' => 'Show Active Only',
+    'activate_selected' => 'Activate Selected',
+    'deactivate_selected' => 'Deactivate Selected',
+
+    // Form fields (nested)
     'fields' => [
         'title' => 'Title',
         'slug' => 'Slug',

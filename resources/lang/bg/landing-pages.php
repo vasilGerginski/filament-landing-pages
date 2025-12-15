@@ -7,7 +7,32 @@ return [
         'plural_label' => 'Лендинг страници',
     ],
 
-    // Form fields
+    // Flat keys used in resource
+    'title' => 'Заглавие',
+    'slug' => 'Slug',
+    'slug_helper' => 'URL идентификатор. Използвайте само букви, цифри и тирета.',
+    'meta_description' => 'Мета описание',
+    'goal_type' => 'Тип цел',
+    'goal_type_helper' => 'Изберете шаблон, за да започнете с предварително конфигурирани секции.',
+    'goal' => 'Цел',
+    'is_active' => 'Активна',
+    'is_active_helper' => 'Само активните лендинг страници са публично достъпни.',
+    'active' => 'Активна',
+    'enable_analytics' => 'Активиране на анализи',
+    'tracking_code' => 'Код за проследяване',
+    'tracking_code_helper' => 'Добавете персонализирани скриптове за проследяване (Google Analytics, Facebook Pixel и др.)',
+    'utm_source' => 'UTM Източник',
+    'utm_medium' => 'UTM Канал',
+    'utm_campaign' => 'UTM Кампания',
+
+    // Table actions
+    'duplicate' => 'Дублирай',
+    'preview' => 'Преглед',
+    'show_active_only' => 'Покажи само активните',
+    'activate_selected' => 'Активирай избраните',
+    'deactivate_selected' => 'Деактивирай избраните',
+
+    // Form fields (nested)
     'fields' => [
         'title' => 'Заглавие',
         'slug' => 'Slug',
