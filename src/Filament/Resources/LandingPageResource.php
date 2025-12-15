@@ -2,6 +2,13 @@
 
 namespace VasilGerginski\FilamentLandingPages\Filament\Resources;
 
+use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -156,11 +163,11 @@ class LandingPageResource extends Resource
                     ->toggle()
                     ->label(__('filament-landing-pages::landing-pages.show_active_only')),
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\Action::make('duplicate')
+            ->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
+                Action::make('duplicate')
                     ->label(__('filament-landing-pages::landing-pages.duplicate'))
                     ->icon('heroicon-o-document-duplicate')
                     ->action(function (LandingPage $record) {
@@ -170,7 +177,7 @@ class LandingPageResource extends Resource
                         $newLandingPage->is_active = false;
                         $newLandingPage->save();
                     }),
-                Tables\Actions\Action::make('preview')
+                Action::make('preview')
                     ->label(__('filament-landing-pages::landing-pages.preview'))
                     ->icon('heroicon-o-eye')
                     ->url(fn (LandingPage $record): string => route('filament-landing-pages.preview', [
@@ -180,13 +187,13 @@ class LandingPageResource extends Resource
                     ->openUrlInNewTab(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\BulkAction::make('activate')
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                    BulkAction::make('activate')
                         ->label(__('filament-landing-pages::landing-pages.activate_selected'))
                         ->icon('heroicon-o-check-circle')
                         ->action(fn ($records) => $records->each->update(['is_active' => true])),
-                    Tables\Actions\BulkAction::make('deactivate')
+                    BulkAction::make('deactivate')
                         ->label(__('filament-landing-pages::landing-pages.deactivate_selected'))
                         ->icon('heroicon-o-x-circle')
                         ->action(fn ($records) => $records->each->update(['is_active' => false])),
