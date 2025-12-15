@@ -2,12 +2,13 @@
 
 namespace VasilGerginski\FilamentLandingPages\Filament\Resources;
 
-use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
@@ -44,15 +45,15 @@ class LandingPageResource extends Resource
         return FilamentLandingPagesPlugin::get()->getNavigationSort();
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema([
-            Forms\Components\Section::make('Basic Information')->schema([
+        return $schema->components([
+            Section::make('Basic Information')->schema([
                 TextInput::make('title')
                     ->label(__('filament-landing-pages::landing-pages.title'))
                     ->required()
                     ->live(onBlur: true)
-                    ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
+                    ->afterStateUpdated(function (string $operation, $state, \Filament\Schemas\Components\Utilities\Set $set) {
                         if ($operation === 'create') {
                             $set('slug', Str::slug($state));
                         }
@@ -82,25 +83,25 @@ class LandingPageResource extends Resource
                         }
                     })
                     ->helperText(__('filament-landing-pages::landing-pages.goal_type_helper')),
-                Forms\Components\Toggle::make('is_active')
+                \Filament\Forms\Components\Toggle::make('is_active')
                     ->label(__('filament-landing-pages::landing-pages.is_active'))
                     ->default(true)
                     ->helperText(__('filament-landing-pages::landing-pages.is_active_helper')),
             ]),
-            Forms\Components\Section::make('Landing Page Content')->schema([
-                Forms\Components\Grid::make()->schema([
-                    Forms\Components\Section::make('Editor')
+            Section::make('Landing Page Content')->schema([
+                Grid::make()->schema([
+                    Section::make('Editor')
                         ->columnSpan(1)
                         ->schema([
                             LandingSectionBuilder::make()->columnSpanFull(),
                         ]),
                 ]),
             ]),
-            Forms\Components\Section::make('Analytics & Tracking')->schema([
-                Forms\Components\Toggle::make('enable_analytics')
+            Section::make('Analytics & Tracking')->schema([
+                \Filament\Forms\Components\Toggle::make('enable_analytics')
                     ->label(__('filament-landing-pages::landing-pages.enable_analytics'))
                     ->default(true),
-                Forms\Components\Textarea::make('tracking_code')
+                Textarea::make('tracking_code')
                     ->label(__('filament-landing-pages::landing-pages.tracking_code'))
                     ->helperText(__('filament-landing-pages::landing-pages.tracking_code_helper'))
                     ->rows(3),
