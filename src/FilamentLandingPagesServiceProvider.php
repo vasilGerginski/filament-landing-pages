@@ -23,6 +23,7 @@ use VasilGerginski\FilamentLandingPages\Livewire\Components\TrustIndicatorsSecti
 use VasilGerginski\FilamentLandingPages\Livewire\LandingPage;
 use VasilGerginski\FilamentLandingPages\Livewire\PreviewLandingPage;
 use VasilGerginski\FilamentLandingPages\Services\ConversionTracker;
+use VasilGerginski\FilamentLandingPages\Commands\InstallCommand;
 
 class FilamentLandingPagesServiceProvider extends ServiceProvider
 {
@@ -67,6 +68,11 @@ class FilamentLandingPagesServiceProvider extends ServiceProvider
         $this->registerLivewireComponents();
 
         if ($this->app->runningInConsole()) {
+            // Register commands
+            $this->commands([
+                InstallCommand::class,
+            ]);
+
             // Publish config
             $this->publishes([
                 __DIR__.'/../config/filament-landing-pages.php' => config_path('filament-landing-pages.php'),
