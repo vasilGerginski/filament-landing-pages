@@ -181,7 +181,6 @@ class LandingPageResource extends Resource
                     ->label(__('filament-landing-pages::landing-pages.preview'))
                     ->icon('heroicon-o-eye')
                     ->url(fn (LandingPage $record): string => route('filament-landing-pages.preview', [
-                        'locale' => app()->getLocale(),
                         'slug' => $record->slug,
                     ]))
                     ->openUrlInNewTab(),

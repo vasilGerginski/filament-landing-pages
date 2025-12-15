@@ -26,7 +26,7 @@ return [
     'routes' => [
         'prefix' => 'landing',
         'middleware' => ['web'],
-        'locale_prefix' => true,
+        'locale_prefix' => false,
     ],
 
     /*

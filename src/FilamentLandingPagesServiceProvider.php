@@ -107,7 +107,7 @@ class FilamentLandingPagesServiceProvider extends ServiceProvider
         Livewire::component('filament-landing-pages::landing-page', LandingPage::class);
         Livewire::component('filament-landing-pages::preview-landing-page', PreviewLandingPage::class);
 
-        // Section components - registered with the prefix for rendering
+        // Section components
         $components = [
             'challenges-section' => ChallengesSection::class,
             'countdown-timer' => CountdownTimer::class,
@@ -126,7 +126,10 @@ class FilamentLandingPagesServiceProvider extends ServiceProvider
         ];
 
         foreach ($components as $name => $class) {
+            // Register with package prefix
             Livewire::component("filament-landing-pages::landing-page-components.{$name}", $class);
+            // Register without prefix (for stored section types)
+            Livewire::component("landing-page-components.{$name}", $class);
         }
     }
 }
