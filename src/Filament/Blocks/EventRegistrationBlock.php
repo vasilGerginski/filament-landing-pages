@@ -148,7 +148,7 @@ class EventRegistrationBlock
                     ->visible(fn (callable $get) => $get('showScheduleOutline'))
                     ->defaultItems(0)
                     ->collapsible()
-                    ->itemLabel(fn (array $state): ?string => ($state['time'] ?? '').': '.($state['activity'] ?? ''))
+                    ->itemLabel(fn (array $state): string => ($state['time'] ?? '').': '.($state['activity'] ?? ''))
                     ->helperText('Event schedule items.'),
 
                 // Button settings

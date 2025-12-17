@@ -5,6 +5,36 @@ namespace VasilGerginski\FilamentLandingPages\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string|null $meta_description
+ * @property array|null $sections
+ * @property string $goal_type
+ * @property string $template
+ * @property bool $is_active
+ * @property bool $enable_analytics
+ * @property string|null $tracking_code
+ * @property string|null $utm_source
+ * @property string|null $utm_medium
+ * @property string|null $utm_campaign
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read string $url
+ * @property-read string $preview_url
+ * @property-read string $tracking_url
+ * @property-read string $localized_meta_title
+ * @property-read string $localized_meta_description
+ * @property-read string|null $meta_title
+ * @property-read string|null $meta_keywords
+ * @property-read string|null $og_title
+ * @property-read string|null $og_description
+ * @property-read string|null $og_image
+ * @property-read string $localized_og_title
+ * @property-read string $localized_og_description
+ * @property-read string $localized_meta_keywords
+ */
 class LandingPage extends Model
 {
     use HasFactory;

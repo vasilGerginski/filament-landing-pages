@@ -8,9 +8,20 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use VasilGerginski\FilamentLandingPages\Contracts\LeadModelContract;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string|null $phone
+ * @property string $email
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string|null $email_verification_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ */
 class Lead extends Model implements LeadModelContract
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
     protected $fillable = [
         'name',

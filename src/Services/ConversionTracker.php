@@ -78,7 +78,7 @@ class ConversionTracker implements ConversionTrackerContract
 
         foreach ($trackingParams as $param) {
             if ($request->has($param)) {
-                session([$param => $request->get($param)]);
+                session([$param => $request->query($param)]);
             }
         }
     }

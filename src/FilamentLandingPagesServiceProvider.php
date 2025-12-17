@@ -3,8 +3,10 @@
 namespace VasilGerginski\FilamentLandingPages;
 
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 use VasilGerginski\FilamentLandingPages\Contracts\ConversionTrackerContract;
 use VasilGerginski\FilamentLandingPages\Contracts\LeadModelContract;
 use VasilGerginski\FilamentLandingPages\Livewire\Components\ChallengesSection;
@@ -23,19 +25,35 @@ use VasilGerginski\FilamentLandingPages\Livewire\Components\TestimonialsSection;
 use VasilGerginski\FilamentLandingPages\Livewire\Components\TrustIndicatorsSection;
 use VasilGerginski\FilamentLandingPages\Livewire\LandingPage;
 use VasilGerginski\FilamentLandingPages\Livewire\PreviewLandingPage;
-use VasilGerginski\FilamentLandingPages\Services\ConversionTracker;
-use VasilGerginski\FilamentLandingPages\Commands\InstallCommand;
+use VasilGerginski\FilamentLandingPages\Models\LandingPage as LandingPageModel;
 use VasilGerginski\FilamentLandingPages\Policies\LandingPagePolicy;
+use VasilGerginski\FilamentLandingPages\Services\ConversionTracker;
 
-class FilamentLandingPagesServiceProvider extends ServiceProvider
+class FilamentLandingPagesServiceProvider extends PackageServiceProvider
 {
-    public function register(): void
-    {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/filament-landing-pages.php',
-            'filament-landing-pages'
-        );
+    public static string $name = 'filament-landing-pages';
 
+    public static string $viewNamespace = 'filament-landing-pages';
+
+    public function configurePackage(Package $package): void
+    {
+        $package->name(static::$name)
+            ->hasConfigFile()
+            ->hasViews(static::$viewNamespace)
+            ->hasTranslations()
+            ->hasRoute('web')
+            ->hasMigrations($this->getMigrations())
+            ->hasInstallCommand(function (InstallCommand $command) {
+                $command
+                    ->publishConfigFile()
+                    ->publishMigrations()
+                    ->askToRunMigrations()
+                    ->askToStarRepoOnGitHub('vasilgerginski/filament-landing-pages');
+            });
+    }
+
+    public function packageRegistered(): void
+    {
         // Bind Lead model contract
         $this->app->bind(LeadModelContract::class, function ($app) {
             $modelClass = config('filament-landing-pages.models.lead');
@@ -55,50 +73,22 @@ class FilamentLandingPagesServiceProvider extends ServiceProvider
         });
     }
 
-    public function boot(): void
+    public function packageBooted(): void
     {
         // Register policy
-        $modelClass = config('filament-landing-pages.models.landing_page', \VasilGerginski\FilamentLandingPages\Models\LandingPage::class);
+        $modelClass = config('filament-landing-pages.models.landing_page', LandingPageModel::class);
         Gate::policy($modelClass, LandingPagePolicy::class);
-
-        // Load routes
-        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-
-        // Load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'filament-landing-pages');
-
-        // Load translations
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'filament-landing-pages');
 
         // Register Livewire components
         $this->registerLivewireComponents();
+    }
 
-        if ($this->app->runningInConsole()) {
-            // Register commands
-            $this->commands([
-                InstallCommand::class,
-            ]);
-
-            // Publish config
-            $this->publishes([
-                __DIR__.'/../config/filament-landing-pages.php' => config_path('filament-landing-pages.php'),
-            ], 'filament-landing-pages-config');
-
-            // Publish migrations
-            $this->publishesMigrations([
-                __DIR__.'/../database/migrations' => database_path('migrations'),
-            ], 'filament-landing-pages-migrations');
-
-            // Publish views
-            $this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/filament-landing-pages'),
-            ], 'filament-landing-pages-views');
-
-            // Publish translations
-            $this->publishes([
-                __DIR__.'/../resources/lang' => $this->app->langPath('vendor/filament-landing-pages'),
-            ], 'filament-landing-pages-translations');
-        }
+    protected function getMigrations(): array
+    {
+        return [
+            'create_landing_pages_table',
+            'create_leads_table',
+        ];
     }
 
     protected function registerLivewireComponents(): void

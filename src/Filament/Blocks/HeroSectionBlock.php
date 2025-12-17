@@ -5,7 +5,6 @@ namespace VasilGerginski\FilamentLandingPages\Filament\Blocks;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 
 class HeroSectionBlock

@@ -7,7 +7,11 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Str;
 use VasilGerginski\FilamentLandingPages\Filament\Resources\LandingPageResource;
+use VasilGerginski\FilamentLandingPages\Models\LandingPage;
 
+/**
+ * @property LandingPage $record
+ */
 class EditLandingPage extends EditRecord
 {
     protected static string $resource = LandingPageResource::class;

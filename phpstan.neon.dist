@@ -1,0 +1,18 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 5
+    paths:
+        - src
+        - config
+        - database
+    tmpDir: build/phpstan
+    checkOctaneCompatibility: true
+    checkModelProperties: true
+    ignoreErrors:
+        # View strings - PHPStan cannot verify Blade view existence at analysis time
+        # These views exist and work correctly at runtime
+        - '#Parameter \#1 \$view of function view expects view-string\|null, string given#'
+        # Optional SEOTools package - calls are guarded by class_exists() check
+        - '#Call to static method .+ on an unknown class Artesaos\\SEOTools#'

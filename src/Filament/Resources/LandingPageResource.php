@@ -83,7 +83,7 @@ class LandingPageResource extends Resource
                         $templateRegistry = new TemplateRegistry;
                         $template = $templateRegistry->getSections($state);
 
-                        if (is_array($template) && ! empty($template)) {
+                        if (! empty($template)) {
                             $currentData = $livewire->form->getState();
                             $currentData['sections'] = $template;
                             $livewire->form->fill($currentData);
@@ -185,7 +185,7 @@ class LandingPageResource extends Resource
                     ]))
                     ->openUrlInNewTab(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                     BulkAction::make('activate')
