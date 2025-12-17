@@ -36,7 +36,7 @@
           @endif
           @if($buttonText && $buttonLink)
           <div class="mt-8 md:mt-12">
-            <a href="{{ strpos($buttonLink, '#') === 0 ? $buttonLink : ('/' . app()->getLocale() . (strpos($buttonLink, '/') === 0 ? $buttonLink : '/' . $buttonLink)) }}"
+            <a href="{{ $buttonHref }}"
               data-umami-event="CTA Button Click"
               data-umami-event-section="CTA Section"
               data-umami-event-text="{{ $buttonText }}"

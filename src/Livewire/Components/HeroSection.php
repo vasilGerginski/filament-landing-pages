@@ -42,12 +42,40 @@ class HeroSection extends Component
         $this->badge = $badge;
         $this->title = $title;
         $this->subtitle = $subtitle;
-        $this->buttons = $buttons ?? [];
+        $this->buttons = $this->processButtons($buttons ?? []);
         $this->statistics = $statistics ?? [];
         $this->primaryButtonText = $primaryButtonText;
         $this->primaryButtonLink = $primaryButtonLink;
         $this->secondaryButtonText = $secondaryButtonText;
         $this->secondaryButtonLink = $secondaryButtonLink;
+    }
+
+    protected function processButtons(array $buttons): array
+    {
+        return array_map(function ($button) {
+            $button['href'] = $this->buildUrl($button['link'] ?? null);
+
+            return $button;
+        }, $buttons);
+    }
+
+    protected function buildUrl(?string $link): string
+    {
+        if (! $link) {
+            return '#';
+        }
+
+        if (str_starts_with($link, '#') || str_starts_with($link, 'http')) {
+            return $link;
+        }
+
+        $normalizedLink = str_starts_with($link, '/') ? $link : '/'.$link;
+
+        if (config('filament-landing-pages.routes.locale_prefix', false)) {
+            return '/'.app()->getLocale().$normalizedLink;
+        }
+
+        return $normalizedLink;
     }
 
     public function render()

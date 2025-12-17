@@ -17,7 +17,7 @@
                 <div class="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-y-0 md:space-x-6 ">
                     @foreach ($buttons as $button)
                         @if ($button['style'] === 'primary')
-                            <a href="{{ strpos($button['link'], '#') === 0 ? $button['link'] : '/' . app()->getLocale() . (strpos($button['link'], '/') === 0 ? $button['link'] : '/' . $button['link']) }}"
+                            <a href="{{ $button['href'] }}"
                                 data-umami-event="Hero Button Click" data-umami-event-text="{{ $button['text'] }}"
                                 data-umami-event-type="Primary"
                                 class="hover:bg-opacity-90 inline-block transform rounded-full bg-[#1CE088] px-6 py-3 md:px-8 md:py-4 font-bold text-black shadow-lg transition-all text-base md:text-sm mobile-hover-fix relative"
@@ -27,7 +27,7 @@
                                 <span class="relative z-10">{{ $button['text'] }}</span>
                             </a>
                         @elseif($button['style'] === 'secondary')
-                            <a href="{{ strpos($button['link'], '#') === 0 ? $button['link'] : '/' . app()->getLocale() . (strpos($button['link'], '/') === 0 ? $button['link'] : '/' . $button['link']) }}"
+                            <a href="{{ $button['href'] }}"
                                 data-umami-event="Hero Button Click" data-umami-event-text="{{ $button['text'] }}"
                                 data-umami-event-type="Secondary"
                                 class="inline-block transform rounded-full border border-white/30 px-6 py-3 md:px-8 md:py-4 font-medium text-white backdrop-blur-sm transition-all text-base md:text-sm mobile-hover-fix relative mt-4"
