@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use VasilGerginski\FilamentLandingPages\Livewire\LandingPage;
 use VasilGerginski\FilamentLandingPages\Livewire\PreviewLandingPage;
+use VasilGerginski\FilamentLandingPages\Livewire\VerifyLeadEmail;
 
 $prefix = config('filament-landing-pages.routes.prefix', 'landing');
 $middleware = config('filament-landing-pages.routes.middleware', ['web']);
-$localePrefix = config('filament-landing-pages.routes.locale_prefix', true);
+$localePrefix = config('filament-landing-pages.routes.locale_prefix', false);
 
 // Preview state route (outside locale prefix)
 Route::post('/landing-preview-state', PreviewLandingPage::class)
@@ -25,6 +26,10 @@ if ($localePrefix) {
             Route::get("/{$prefix}-preview/{slug}", LandingPage::class)
                 ->defaults('preview', true)
                 ->name('filament-landing-pages.preview');
+
+            // Email verification route
+            Route::get('/verify-lead-email/{id}/{token}', VerifyLeadEmail::class)
+                ->name('filament-landing-pages.verify-email');
         });
 } else {
     Route::middleware($middleware)->group(function () use ($prefix) {
@@ -34,5 +39,9 @@ if ($localePrefix) {
         Route::get("/{$prefix}-preview/{slug}", LandingPage::class)
             ->defaults('preview', true)
             ->name('filament-landing-pages.preview');
+
+        // Email verification route
+        Route::get('/verify-lead-email/{id}/{token}', VerifyLeadEmail::class)
+            ->name('filament-landing-pages.verify-email');
     });
 }

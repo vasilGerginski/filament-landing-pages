@@ -11,19 +11,14 @@ class LeadEmailVerification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public string $token;
+    public ?string $customSubject;
 
-    /**
-     * Create a new notification instance.
-     */
-    public function __construct(string $token)
+    public function __construct(?string $customSubject = null)
     {
-        $this->token = $token;
+        $this->customSubject = $customSubject;
     }
 
     /**
-     * Get the notification's delivery channels.
-     *
      * @return array<int, string>
      */
     public function via(object $notifiable): array
@@ -31,16 +26,16 @@ class LeadEmailVerification extends Notification implements ShouldQueue
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
     public function toMail(object $notifiable): MailMessage
     {
+        $verificationUrl = $this->buildVerificationUrl($notifiable);
         $locale = app()->getLocale();
-        $verificationUrl = url('/'.$locale.'/verify-email/'.$notifiable->id.'/'.sha1($notifiable->email));
+
+        $subject = $this->customSubject
+            ?? ($locale === 'bg' ? 'Потвърдете вашия имейл адрес' : 'Verify Your Email Address');
 
         return (new MailMessage)
-            ->subject($locale === 'bg' ? 'Потвърдете вашия имейл адрес' : 'Verify Your Email Address')
+            ->subject($subject)
             ->greeting($locale === 'bg' ? 'Здравейте, '.$notifiable->name.'!' : 'Hello, '.$notifiable->name.'!')
             ->line($locale === 'bg'
                 ? 'Благодарим ви за интереса към нашите услуги! Моля, потвърдете вашия имейл адрес, като кликнете върху бутона по-долу.'
@@ -51,15 +46,21 @@ class LeadEmailVerification extends Notification implements ShouldQueue
                 : 'If you did not create this request, please ignore this email.');
     }
 
+    protected function buildVerificationUrl(object $notifiable): string
+    {
+        $localePrefix = config('filament-landing-pages.routes.locale_prefix', false);
+        $prefix = $localePrefix ? '/'.app()->getLocale() : '';
+
+        return url($prefix.'/verify-lead-email/'.$notifiable->id.'/'.$notifiable->email_verification_token);
+    }
+
     /**
-     * Get the array representation of the notification.
-     *
      * @return array<string, mixed>
      */
     public function toArray(object $notifiable): array
     {
         return [
-            'token' => $this->token,
+            'lead_id' => $notifiable->id,
         ];
     }
 }

@@ -155,7 +155,8 @@ class LeadForm extends Component
 
         // Send verification email if enabled
         if ($this->sendVerificationEmail && config('filament-landing-pages.lead_tracking.send_verification_email', true)) {
-            $lead->notify(new LeadEmailVerification($this->verificationEmailSubject));
+            $lead->generateEmailVerificationToken();
+            $lead->notify(new LeadEmailVerification($this->verificationEmailSubject ?? null));
         }
 
         // Track conversion
@@ -171,15 +172,9 @@ class LeadForm extends Component
 
         // Handle redirect or show success message
         if ($this->redirectAfterSubmit) {
-            $locale = app()->getLocale();
-            $url = $this->redirectAfterSubmit;
+            $url = $this->buildUrl($this->redirectAfterSubmit);
 
             session()->put('lead_id', $lead->id);
-
-            // Handle relative URLs
-            if (strpos($url, '/') === 0 && strpos($url, '/'.$locale) !== 0) {
-                $url = '/'.$locale.$url;
-            }
 
             return $this->redirect($url, navigate: true);
         }
@@ -215,6 +210,25 @@ class LeadForm extends Component
             'consent.required' => __('filament-landing-pages::landing-pages.validation.consent_required'),
             'consent.accepted' => __('filament-landing-pages::landing-pages.validation.consent_required'),
         ];
+    }
+
+    protected function buildUrl(?string $link): string
+    {
+        if (! $link) {
+            return '#';
+        }
+
+        if (str_starts_with($link, '#') || str_starts_with($link, 'http')) {
+            return $link;
+        }
+
+        $normalizedLink = str_starts_with($link, '/') ? $link : '/'.$link;
+
+        if (config('filament-landing-pages.routes.locale_prefix', false)) {
+            return '/'.app()->getLocale().$normalizedLink;
+        }
+
+        return $normalizedLink;
     }
 
     public function render()

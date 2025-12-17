@@ -25,6 +25,7 @@ use VasilGerginski\FilamentLandingPages\Livewire\Components\TestimonialsSection;
 use VasilGerginski\FilamentLandingPages\Livewire\Components\TrustIndicatorsSection;
 use VasilGerginski\FilamentLandingPages\Livewire\LandingPage;
 use VasilGerginski\FilamentLandingPages\Livewire\PreviewLandingPage;
+use VasilGerginski\FilamentLandingPages\Livewire\VerifyLeadEmail;
 use VasilGerginski\FilamentLandingPages\Models\LandingPage as LandingPageModel;
 use VasilGerginski\FilamentLandingPages\Policies\LandingPagePolicy;
 use VasilGerginski\FilamentLandingPages\Services\ConversionTracker;
@@ -96,6 +97,7 @@ class FilamentLandingPagesServiceProvider extends PackageServiceProvider
         // Main components
         Livewire::component('filament-landing-pages::landing-page', LandingPage::class);
         Livewire::component('filament-landing-pages::preview-landing-page', PreviewLandingPage::class);
+        Livewire::component('filament-landing-pages::verify-lead-email', VerifyLeadEmail::class);
 
         // Section components
         $components = [

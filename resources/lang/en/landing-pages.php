@@ -101,6 +101,7 @@ return [
         'verification_email_line1' => 'Please click the button below to verify your email address.',
         'verification_email_action' => 'Verify Email Address',
         'verification_email_line2' => 'If you did not submit a form on our website, no further action is required.',
+        'saved' => 'Landing page saved successfully.',
     ],
 
     // Actions
@@ -110,4 +111,30 @@ return [
         'delete' => 'Delete',
         'create' => 'Create Landing Page',
     ],
+
+    // Leads
+    'leads' => 'Leads',
+    'lead' => 'Lead',
+    'lead_information' => 'Lead Information',
+    'name' => 'Name',
+    'email' => 'Email',
+    'phone' => 'Phone',
+    'verified' => 'Verified',
+    'email_verified_at' => 'Email Verified At',
+    'created_at' => 'Created At',
+    'verified_only' => 'Verified Only',
+    'unverified_only' => 'Unverified Only',
+    'date_range' => 'Date Range',
+    'today' => 'Today',
+    'this_week' => 'This Week',
+    'this_month' => 'This Month',
+
+    // Email verification
+    'verification_invalid_title' => 'Invalid Link',
+    'verification_invalid_message' => 'This verification link is invalid or has expired.',
+    'verification_already_title' => 'Already Verified',
+    'verification_already_message' => ':name, your email has already been verified.',
+    'verification_success_title' => 'Email Verified',
+    'verification_success_message' => 'Thank you :name! Your email has been successfully verified.',
+
 ];

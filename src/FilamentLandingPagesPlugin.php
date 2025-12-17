@@ -5,10 +5,13 @@ namespace VasilGerginski\FilamentLandingPages;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use VasilGerginski\FilamentLandingPages\Filament\Resources\LandingPageResource;
+use VasilGerginski\FilamentLandingPages\Filament\Resources\LeadResource;
 
 class FilamentLandingPagesPlugin implements Plugin
 {
     protected bool $hasLandingPages = true;
+
+    protected bool $hasLeads = true;
 
     protected ?string $navigationGroup = null;
 
@@ -27,6 +30,10 @@ class FilamentLandingPagesPlugin implements Plugin
 
         if ($this->hasLandingPages && config('filament-landing-pages.resources.landing_pages', true)) {
             $resources[] = LandingPageResource::class;
+        }
+
+        if ($this->hasLeads && config('filament-landing-pages.resources.leads', true)) {
+            $resources[] = LeadResource::class;
         }
 
         $panel->resources($resources);
@@ -53,6 +60,13 @@ class FilamentLandingPagesPlugin implements Plugin
     public function landingPages(bool $condition = true): static
     {
         $this->hasLandingPages = $condition;
+
+        return $this;
+    }
+
+    public function leads(bool $condition = true): static
+    {
+        $this->hasLeads = $condition;
 
         return $this;
     }

@@ -64,6 +64,7 @@ return [
     */
     'resources' => [
         'landing_pages' => true,
+        'leads' => true,
     ],
 
     /*

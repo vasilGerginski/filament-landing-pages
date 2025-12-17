@@ -66,7 +66,7 @@ return [
         'faq_section' => 'Секция ЧЗВ',
         'cta_section' => 'Призив за действие',
         'trust_indicators_section' => 'Секция за доверие',
-        'lead_form' => 'Форма за контакт',
+        'lead_form' => 'Лиид форма',
         'newsletter_signup' => 'Абонамент за бюлетин',
         'event_registration' => 'Регистрация за събитие',
         'product_showcase' => 'Представяне на продукти',
@@ -101,6 +101,7 @@ return [
         'verification_email_line1' => 'Моля, натиснете бутона по-долу, за да потвърдите вашия имейл адрес.',
         'verification_email_action' => 'Потвърди имейл',
         'verification_email_line2' => 'Ако не сте попълвали форма на нашия уебсайт, не е необходимо никакво допълнително действие.',
+        'saved' => 'Лендинг страницата е запазена успешно.',
     ],
 
     // Actions
@@ -110,4 +111,30 @@ return [
         'delete' => 'Изтриване',
         'create' => 'Създай лендинг страница',
     ],
+
+    // Leads
+    'leads' => 'Лийдове',
+    'lead' => 'Лийд',
+    'lead_information' => 'Информация за лийда',
+    'name' => 'Име',
+    'email' => 'Имейл',
+    'phone' => 'Телефон',
+    'verified' => 'Потвърден',
+    'email_verified_at' => 'Имейл потвърден на',
+    'created_at' => 'Създаден на',
+    'verified_only' => 'Само потвърдени',
+    'unverified_only' => 'Само непотвърдени',
+    'date_range' => 'Период',
+    'today' => 'Днес',
+    'this_week' => 'Тази седмица',
+    'this_month' => 'Този месец',
+
+    // Email verification
+    'verification_invalid_title' => 'Невалиден линк',
+    'verification_invalid_message' => 'Този линк за потвърждение е невалиден или е изтекъл.',
+    'verification_already_title' => 'Вече е потвърдено',
+    'verification_already_message' => ':name, вашият имейл вече е потвърден.',
+    'verification_success_title' => 'Имейл потвърден',
+    'verification_success_message' => 'Благодарим :name! Вашият имейл е успешно потвърден.',
+
 ];
